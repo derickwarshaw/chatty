@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import {
+  AsyncStorage,
+} from 'react-native';
 
 import { ApolloClient } from 'apollo-client';
 import { ApolloLink } from 'apollo-link';
 import { ApolloProvider } from 'react-apollo';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { composeWithDevTools, applyMiddleware } from 'redux-devtools-extension';
 import { createHttpLink } from 'apollo-link-http';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
@@ -12,6 +15,8 @@ import ReduxLink from 'apollo-link-redux';
 import { WebSocketLink } from 'apollo-link-ws';
 import { getMainDefinition } from 'apollo-utilities';
 import { SubscriptionClient } from 'subscriptions-transport-ws';
+import { persistStore, persistCombineReducers } from 'redux-persist';
+import thunk from 'redux-thunk';
 
 import AppWithNavigationState, {
   navigationReducer, 
@@ -21,17 +26,22 @@ import auth from './reducers/auth.reducer';
 
 const URL = 'localhost:8080'; // set your comp's url here
 
+const reducer = persistCombineReducers(config, {
+  apollo: apolloReducer,
+  nav: navigationReducer,
+  auth,
+});
+
 const store = createStore(
-  combineReducers({
-    apollo: apolloReducer,
-    nav: navigationReducer,
-    auth,
-  }),
+  reducer,
   {}, // initial state
   composeWithDevTools(
-    applyMiddleware(navigationMiddleware),
+    applyMiddleware(thunk, navigationMiddleware),
   ),
 );
+
+// persistent storage
+const persistor = persistStore(store);
 
 const cache = new ReduxCache({ store });
 
@@ -77,7 +87,9 @@ export default class App extends Component {
     return (
       <ApolloProvider client={client}>
         <Provider store={store}>
-          <AppWithNavigationState />
+          <PersistGate persistor={persistor}>
+            <AppWithNavigationState />
+          </PersistGate>
         </Provider>
       </ApolloProvider>
     );
