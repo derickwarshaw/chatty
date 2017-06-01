@@ -49,6 +49,21 @@ const reduxLink = new ReduxLink(store);
 
 const httpLink = createHttpLink({ uri: `http://${URL}/graphql` });
 
+// middleware for requests
+networkInterface.use([{
+  applyMiddleware(req, next) {
+    if (!req.options.headers) {
+      req.options.headers = {};
+    }
+    // get the authentication token from local storage if it exists
+    const jwt = store.getState().auth.jwt;
+    if (jwt) {
+      req.options.headers.authorization = `Bearer ${jwt}`;
+    }
+    next();
+  },
+}]);
+
 // Create WebSocket client
 export const wsClient = new SubscriptionClient(`ws://${URL}/subscriptions`, {
   reconnect: true,
