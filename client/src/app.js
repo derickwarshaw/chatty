@@ -25,6 +25,7 @@ import AppWithNavigationState, {
 } from './navigation';
 import auth from './reducers/auth.reducer';
 import { logout } from './actions/auth.actions';
+import { FirebaseClient } from './firebase-client';
 
 const URL = 'localhost:8080'; // set your comp's url here
 
@@ -121,6 +122,9 @@ export const client = new ApolloClient({
   cache,
   queryDeduplication: true,
 });
+
+export const firebaseClient = new FirebaseClient();
+firebaseClient.init(); // test FCM
 
 export default class App extends Component {
   render() {
