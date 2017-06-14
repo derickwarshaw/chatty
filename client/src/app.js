@@ -124,7 +124,6 @@ export const client = new ApolloClient({
 });
 
 export const firebaseClient = new FirebaseClient();
-firebaseClient.init(); // test FCM
 
 export default class App extends Component {
   render() {
