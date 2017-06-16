@@ -124,6 +124,7 @@ const link = ApolloLink.from([
 export const client = new ApolloClient({
   link,
   cache,
+  queryDeduplication: true,
 });
 
 export default class App extends Component {
