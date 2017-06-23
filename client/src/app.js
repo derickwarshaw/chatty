@@ -20,6 +20,7 @@ import thunk from 'redux-thunk';
 import _ from 'lodash';
 import { WillPresentNotificationResult } from 'react-native-fcm';
 import { NavigationActions } from 'react-navigation';
+import { createBatchingNetworkInterface } from 'apollo-upload-client';
 
 import AppWithNavigationState, {
   navigationReducer, 
