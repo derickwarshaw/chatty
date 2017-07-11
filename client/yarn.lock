@@ -3938,6 +3938,10 @@ react-native-image-crop-picker@^0.19.2:
   version "0.19.2"
   resolved "https://registry.yarnpkg.com/react-native-image-crop-picker/-/react-native-image-crop-picker-0.19.2.tgz#56afde2232c3da36f8e32378d24e6074e10bb0dd"
 
+react-native-loading-spinner-overlay@^0.5.2:
+  version "0.5.2"
+  resolved "https://registry.yarnpkg.com/react-native-loading-spinner-overlay/-/react-native-loading-spinner-overlay-0.5.2.tgz#b7bcd277476d596615fd7feee601789f9bdc7acc"
+
 react-native-safe-area-view@^0.6.0:
   version "0.6.0"
   resolved "https://registry.yarnpkg.com/react-native-safe-area-view/-/react-native-safe-area-view-0.6.0.tgz#ce01eb27905a77780219537e0f53fe9c783a8b3d"

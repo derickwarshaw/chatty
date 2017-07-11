@@ -29,6 +29,7 @@
 		"react-native-alpha-listview": "^0.2.1",
 		"react-native-fcm": "^13.1.0",
 		"react-native-image-crop-picker": "^0.19.2",
+		"react-native-loading-spinner-overlay": "^0.5.2",
 		"react-native-vector-icons": "^4.5.0",
 		"react-navigation": "^1.0.3",
 		"react-navigation-redux-helpers": "^1.0.1",
